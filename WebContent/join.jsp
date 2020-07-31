@@ -79,6 +79,9 @@
 						<input name="email" id="email" class="form-control" placeholder="Email"
 							type="email">
 					</div>
+					<div class="form-group input-group">
+							<div class="alert alert-danger" id="alert-danger-email">해당 이메일을 사용할 수 없습니다.</div>
+					</div> <!-- form-group// -->
 					<!-- form-group// -->
 					<div class="form-group input-group">
 						<div class="input-group-prepend">
@@ -161,6 +164,7 @@
         	});
     });
     
+    	$("#alert-danger-email").hide();
     $("#email").blur(function(){
     	console.log("포커스를 벗어났습니다.")
     	//포커스를 벗어났을 경우 아작스를 이용하여 db에 있는 이메일의 일치를 확인하여 해당 이메일과 같은 이메일이 있는지 확인하여 j쿼리를 이용하여 사용할 수 있는지 없는지 알수 있게 된다.
@@ -170,7 +174,12 @@
     		      email : em
     		    },
     		    function(data,status){
-	    		      alert(data);
+    		    	if(data.trim() == "true"){
+	    		    	$("#alert-danger-email").show();
+    		    	}else{
+	    		    	$("#alert-danger-email").hide();
+    		    		
+    		    	}
     		});
     });
 </script>

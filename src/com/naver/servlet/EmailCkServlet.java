@@ -37,9 +37,9 @@ public class EmailCkServlet extends HttpServlet {
 		boolean isemail = dao.email_select(email);
 		
 		if(isemail) {
-			out.println("해당 이메일을 사용할 수 없습니다.");
+			out.println("true");
 		}else {
-			out.println("사용가능한 이메일 입니다.");
+			out.println("false");
 		}
 	}
 

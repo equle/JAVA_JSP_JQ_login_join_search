@@ -21,8 +21,8 @@ import dto.SearchDTO;
 public class NVsearchAPI {
 
 	public static ArrayList<SearchDTO> search(String search) {
-		String clientId = "N5MJcjZLiyCif_kr1yxI"; // 애플리케이션 클라이언트 아이디값"
-		String clientSecret = "tUxEs0bKcx"; // 애플리케이션 클라이언트 시크릿값"
+		String clientId = ""; // 애플리케이션 클라이언트 아이디값"
+		String clientSecret = ""; // 애플리케이션 클라이언트 시크릿값"
 
 		ArrayList<SearchDTO> list = new ArrayList<SearchDTO>();
 		
