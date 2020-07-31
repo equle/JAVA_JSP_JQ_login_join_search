@@ -24,7 +24,7 @@
 <ul class="navbar-nav">
   <% if(dto == null){%>
     <li class="nav-item">
-      <a class="nav-link" href="login.nhn">로그인</a>
+      <a class="nav-link" href="login.nhn" >로그인</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" href="join.nhn">회원가입</a>

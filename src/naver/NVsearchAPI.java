@@ -20,15 +20,13 @@ import dto.SearchDTO;
 
 public class NVsearchAPI {
 
-	public static ArrayList<SearchDTO> search(String search) {
-		String clientId = ""; // 애플리케이션 클라이언트 아이디값"
-		String clientSecret = ""; // 애플리케이션 클라이언트 시크릿값"
+	public static String search(String search) {
+		String clientId = "N5MJcjZLiyCif_kr1yxI"; // 애플리케이션 클라이언트 아이디값"
+		String clientSecret = "tUxEs0bKcx"; // 애플리케이션 클라이언트 시크릿값"
 
-		ArrayList<SearchDTO> list = new ArrayList<SearchDTO>();
-		
 		String text = null;
 		try {
-			text = URLEncoder.encode(search+"날씨", "UTF-8"); // 검색어 설정
+			text = URLEncoder.encode(search + "날씨", "UTF-8"); // 검색어 설정
 		} catch (UnsupportedEncodingException e) {
 			throw new RuntimeException("검색어 인코딩 실패", e);
 		}
@@ -43,38 +41,7 @@ public class NVsearchAPI {
 		requestHeaders.put("X-Naver-Client-Secret", clientSecret);
 		String responseBody = get(apiURL, requestHeaders); // 검색 결과 가져오기
 
-		// 가장 큰 JSONObject를 가져옵니다.
-		JSONObject jObject = new JSONObject(responseBody);
-		// 배열을 가져옵니다.
-		JSONArray jArray = jObject.getJSONArray("items");
-
-	    System.out.println(responseBody); //검색 결과 출력
-//		 배열의 모든 아이템을 출력합니다.
-	    for (int i = 0; i < jArray.length(); i++) {
-	        JSONObject obj = jArray.getJSONObject(i);
-	        
-	        String title = obj.getString("title");
-	        String url = obj.getString("link");
-//	        boolean draft = obj.getBoolean("draft");
-	        
-	        System.out.println("title(" + i + "): " + title);
-	        System.out.println("url(" + i + "): " + url);
-//	        System.out.println("draft(" + i + "): " + draft);
-	        
-//	        naverDTO dto = new naverDTO();
-//	        dto.setTitle(obj.getString("title"));
-//	        dto.setUrl(obj.getString("link"));
-//	        
-//	        naverDAOimpl dao = new naverDAOimpl();
-//	        dao.insert(dto);
-	        
-	        SearchDTO dto = new SearchDTO();
-	        
-	        dto.setTitle(title);
-	        dto.setUrl(url);
-	        list.add(dto);
-	    }
-	    return list;
+		return responseBody;
 	}
 
 	private static String get(String apiUrl, Map<String, String> requestHeaders) {

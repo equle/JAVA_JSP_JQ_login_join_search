@@ -137,8 +137,6 @@
 	<br>
 
 <script type="text/javascript">
-
-
     $(function(){
         $("#submit").attr("disabled", "disabled");
         $("#alert-success").hide();
