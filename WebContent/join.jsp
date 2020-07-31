@@ -80,6 +80,7 @@
 							type="email">
 					</div>
 					<div class="form-group input-group">
+							<div class="alert alert-success" id="alert-success-email">사용할수 있는 이메일 입니다.</div>
 							<div class="alert alert-danger" id="alert-danger-email">해당 이메일을 사용할 수 없습니다.</div>
 					</div> <!-- form-group// -->
 					<!-- form-group// -->
@@ -93,7 +94,7 @@
 							<option value="011">011</option>
 							<option value="051">051</option>
 							<option value="019">019</option>
-						</select> <input name="phone2" id="phone" class="form-control" placeholder="Phone number"
+						</select> <input name="phone2" id="phone2" class="form-control" placeholder="Phone number"
 							type="text">
 					</div> <!-- form-group// -->
 
@@ -162,26 +163,35 @@
                     }
         		}
         	});
-    });
-    
-    	$("#alert-danger-email").hide();
-    $("#email").blur(function(){
-    	console.log("포커스를 벗어났습니다.")
-    	//포커스를 벗어났을 경우 아작스를 이용하여 db에 있는 이메일의 일치를 확인하여 해당 이메일과 같은 이메일이 있는지 확인하여 j쿼리를 이용하여 사용할 수 있는지 없는지 알수 있게 된다.
-    	var em=$("#email").val();
-    	$.post("emailck.nhn",
-    		    {
-    		      email : em
-    		    },
-    		    function(data,status){
-    		    	if(data.trim() == "true"){
-	    		    	$("#alert-danger-email").show();
-    		    	}else{
-	    		    	$("#alert-danger-email").hide();
-    		    		
-    		    	}
-    		});
-    });
+
+	});
+
+	$(document).ready(function() {
+		$("#alert-success-email").hide();
+		$("#alert-danger-email").hide();
+		$("#email").blur(function() {
+			console.log("포커스를 벗어났습니다.")
+			//포커스를 벗어났을 경우 아작스를 이용하여 db에 있는 이메일의 일치를 확인하여 해당 이메일과 같은 이메일이 있는지 확인하여 j쿼리를 이용하여 사용할 수 있는지 없는지 알수 있게 된다.
+			var em = $("#email").val();
+			$.post("emailck.nhn", {
+				email : em
+			}, function(data, status) {
+				if (data.trim() == "true") {
+					$("#alert-success-email").hide();
+					$("#alert-danger-email").show();
+				} else {
+					$("#alert-success-email").show();
+					$("#alert-danger-email").hide();
+
+				}
+			});
+		});
+		
+		$("#phone2").focus(function() {
+			$("#alert-success-email").hide();
+			$("#alert-danger-email").hide();
+		});
+	});
 </script>
 
 </body>
