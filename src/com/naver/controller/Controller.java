@@ -55,6 +55,14 @@ public class Controller extends HttpServlet {
 			site = "search.jsp";
 		}else if(uri.equals("searchok.nhn")){
 			site = "SearchServlet";
+		}else if(uri.equals("food.nhn")){
+			site = "food.jsp";
+		}else if(uri.equals("foodok.nhn")){
+			site = "FoodServlet";
+		}else if(uri.equals("movie.nhn")){
+			site = "movie.jsp";
+		}else if(uri.equals("movieok.nhn")){
+			site = "MovieServlet";
 		}else {
 			site = "404.jsp";
 		}

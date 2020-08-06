@@ -15,7 +15,7 @@
 <hr>
 <div class="card bg-light">
 <article class="card-body mx-auto" style="max-width: 400px;">
-	<h4 class="card-title mt-3 text-center">날씨 검색</h4>
+	<h4 class="card-title mt-3 text-center">맛집 검색</h4>
 	<p class="text-center">지역을 입력 하세요!!</p>
 	
     <div class="form-group input-group">
@@ -37,7 +37,7 @@
 		var sc = $("#search").val();
 // 		$("#result").html("result : "+sc);
 		console.log(sc);
-			$.post("searchok.nhn", {
+			$.post("foodok.nhn", {
 				search : sc
 			}, function(data, status) {
 				var html = "";

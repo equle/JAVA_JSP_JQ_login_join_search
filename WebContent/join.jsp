@@ -1,52 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<meta charset="UTF-8">
-<title>join page</title>
-<head>
-<style>
-.divider-text {
-	position: relative;
-	text-align: center;
-	margin-top: 15px;
-	margin-bottom: 15px;
-}
-
-.divider-text span {
-	padding: 7px;
-	font-size: 12px;
-	position: relative;
-	z-index: 2;
-}
-
-.divider-text:after {
-	content: "";
-	position: absolute;
-	width: 100%;
-	border-bottom: 1px solid #ddd;
-	top: 55%;
-	left: 0;
-	z-index: 1;
-}
-
-.btn-facebook {
-	background-color: #405D9D;
-	color: #fff;
-}
-
-.btn-twitter {
-	background-color: #42AEEC;
-	color: #fff;
-}
-</style>
-
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script	src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-<script	src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
-
 
 <%@ include file="top.jsp" %>
 
@@ -79,10 +32,9 @@
 						<input name="email" id="email" class="form-control" placeholder="Email"
 							type="email">
 					</div>
-					<div class="form-group input-group">
-							<div class="alert alert-success" id="alert-success-email">사용할수 있는 이메일 입니다.</div>
-							<div class="alert alert-danger" id="alert-danger-email">해당 이메일을 사용할 수 없습니다.</div>
-					</div> <!-- form-group// -->
+					
+					<div class="alert alert-success" id="alert-success-email">사용할수 있는 이메일 입니다.</div>
+					<div class="alert alert-danger" id="alert-danger-email">해당 이메일을 사용할 수 없습니다.</div>
 					<!-- form-group// -->
 					<div class="form-group input-group">
 						<div class="input-group-prepend">

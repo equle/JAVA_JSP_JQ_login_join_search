@@ -18,7 +18,7 @@ import org.json.JSONObject;
 
 import dto.SearchDTO;
 
-public class NVsearchAPI {
+public class NVfoodAPI {
 
 	public static String search(String search) {
 		String clientId = "N5MJcjZLiyCif_kr1yxI"; // 애플리케이션 클라이언트 아이디값"
@@ -31,7 +31,7 @@ public class NVsearchAPI {
 			throw new RuntimeException("검색어 인코딩 실패", e);
 		}
 		// 테마별 검색 blog, news ....
-		String apiURL = "https://openapi.naver.com/v1/search/news?query=" + text; // json 결과
+		String apiURL = "https://openapi.naver.com/v1/search/blog?query=" + text; // json 결과
 		// String apiURL = "https://openapi.naver.com/v1/search/blog.xml?query="+ text;
 		// // xml 결과
 

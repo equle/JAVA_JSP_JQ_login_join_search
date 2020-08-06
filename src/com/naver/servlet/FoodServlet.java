@@ -9,13 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import naver.NVsearchAPI;
+import naver.NVfoodAPI;
 
-@WebServlet("/SearchServlet")
-public class SearchServlet extends HttpServlet {
+@WebServlet("/FoodServlet")
+public class FoodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public SearchServlet() {
+    public FoodServlet() {
         super();
     }
 
@@ -23,9 +23,9 @@ public class SearchServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("application/json; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		String search = request.getParameter("search") + " 날씨";
+		String search = request.getParameter("search") + " 맛집";
 		System.out.println(search);
-		String jsonData = NVsearchAPI.search(search);
+		String jsonData = NVfoodAPI.search(search); //+"맛집"
 		out.println(jsonData);
 //		response.setContentType("text/html; charset=UTF-8");
 		
