@@ -14,45 +14,36 @@ import com.google.gson.Gson;
 
 import dao.MovieDAO;
 import dao.MovieDAOimpl;
+import dao.UserDAO;
 import dto.MovieDTO;
+import dto.MovieInsertDTO;
 import dto.MovieselectDTO;
 import naver.NVmovieCrawler;
+import naver.NVmovieinsertCrawler;
 
-@WebServlet("/MovieServlet")
-public class MovieServlet extends HttpServlet {
+@WebServlet("/WriteServlet")
+public class WriteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public MovieServlet() {
+    public WriteServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("application/json; charset=UTF-8");
-//		response.setContentType("text/html; charset=UTF-8");
+		request.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
+		int num = Integer.parseInt(request.getParameter("num"));
+		
+		MovieDAO dao = new MovieDAOimpl(); // DB에 저장되어있는 데이터 가져와 출력
 
-//		ArrayList<MovieDTO> dtoList = NVmovieCrawler.moviesearch(); 네이버 크롤링 java로 버퍼가 걸려 느리다.
-		
-		MovieDAO dao = new MovieDAOimpl(); //DB에 저장되어있는 데이터 가져와 출력
-		
-		ArrayList<MovieselectDTO> dtoList = dao.select();
-		
+		MovieselectDTO dto = dao.select(num);
+
 		Gson gson = new Gson();
-		String jsonData = gson.toJson(dtoList);
+		String jsonData = gson.toJson(dto);
 		System.out.println(jsonData);
 		out.println(jsonData);
-		
-		//dto를 json으로 변환 시켜 작업을 하면 jquary로 출력 가능
-		//Gson라이브러리를 활용하면 쉽게 변환 시킬수 있다.
-		//변환된 문자열을 아래에서 뿌린다.
-		
-//		String search = request.getParameter("search") + " 영화";
-//		System.out.println(search);
-//		String jsonData = NVmovieCrawler; //+"맛집"
 
-//		request.setCharacterEncoding("UTF-8");
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

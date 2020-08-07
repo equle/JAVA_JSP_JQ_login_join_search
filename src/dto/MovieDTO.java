@@ -3,6 +3,7 @@ package dto;
 public class MovieDTO {
 	private String title, url, src;
 
+
 	public String getTitle() {
 		return title;
 	}
