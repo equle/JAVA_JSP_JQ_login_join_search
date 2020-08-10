@@ -30,11 +30,9 @@
 					</thead>
 					<thead>
 						<tr>
-							<th colspan="2" style="background-color: #eeeeee; text-align: center;">
-							
-								영화제목 : 
-								글쓴이 : <%= dto.getName() %>
-						
+							<th colspan="2" style="background-color: #eeeeee; text-align: center;" >
+								<div id="result"></div>
+									글쓴이 : <%=dto.getName() %>
 							</th>
 						</tr>
 					</thead>
@@ -43,7 +41,7 @@
 							<td><input type="text" class="form-control" placeholder="글 제목" name="" maxlength="50" value=""></td>
 						</tr>
 						<tr>
-							<td><textarea class="form-control" placeholder="글 내용" name="" maxlength="2048" style="height: 350px;" >여기내용 들어나</textarea></td>
+							<td><textarea class="form-control" placeholder="글 내용" name="" maxlength="2048" style="height: 350px;" >여기내용 들어가나</textarea></td>
 						</tr>
 					</tbody>
 				</table>	
@@ -53,25 +51,20 @@
 <script>
 
 	$(document).ready(function() {
-		var num = $(<%= num %>).val();
-// 		$("#result").html("result : " + sc);
-// 		console.log(sc);
+		var num = num;
+		
 		$.get("writeok.nhn", {
 			num : num
 // 			search : sc
 		}, function(data, status) {
 			var html = "";
-			$.each(data, function(key, field) {
+			$.each(data) {
 // 				alert('key:'+ key +', title:'+field.title+',url:'+field.url);
-// 				html += "<a href="+field.url + "target= _blank >
-// 				html += "<img src =" + field.src + "><p>"+field.title +"</p>"
-// 				html += "<p> 감독 : "+field.dt +"</p>"
-// 				html += "<p> 감독 : "+field.at +"</p>"
-// 				html += "<a href='write.nhn?num="+ field.num +"' class='btn btn-info' role='button'>후기작성</a><hr>"
-// 				$("#result").html(html);
-			});
+				html += "<p> 영화 제목 : "+ data.title +"</p>"
+				$("#result").html(html);
 		});
 	});
+});
 </script>
 </body>
 </html>

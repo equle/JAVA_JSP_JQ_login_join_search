@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import db.DB;
+import dto.MovieDTO;
 import dto.MovieInsertDTO;
 import dto.MovieselectDTO;
+import dto.reviewDTO;
 
 public class MovieDAOimpl implements MovieDAO{
 
@@ -62,12 +64,60 @@ public class MovieDAOimpl implements MovieDAO{
 			}
 		}
 	}
+
+	public void insert(reviewDTO dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		try {
+
+			conn = DB.conn();
+
+			
+			StringBuffer sql = new StringBuffer();
+			sql.append("INSERT INTO review_tb(m_movie_num, m_user_num, r_title, r_score,r_text)\r\n");
+			sql.append("VALUES((SELECT m_num FROM movie_tb WHERE m_num=?),(SELECT usernum FROM signup_tb WHERE usernum=?),?,?,?)");
+			
+			pstmt = conn.prepareStatement(sql.toString());
+			
+			pstmt.setInt(1, dto.getM_num());
+			pstmt.setInt(2, dto.getU_num());
+			pstmt.setString(3, dto.getR_title());
+			pstmt.setInt(4, dto.getR_score());
+			pstmt.setString(5, dto.getR_text());
+			
+			
+			int rs = pstmt.executeUpdate();
+			if (rs == 0) {
+				System.out.println("데이터 입력 실패");
+			} else {
+				System.out.println("데이터 입력 성공");
+			}
+
+		} catch (ClassNotFoundException e) {
+			System.out.println("드라이버 로딩 실패");
+		} catch (SQLException e) {
+			System.out.println("에러: " + e);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null && !conn.isClosed()) {
+					conn.close();
+				}
+				if (pstmt != null && !pstmt.isClosed()) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
 	
-	public ArrayList<MovieselectDTO> select() {
+	public ArrayList<MovieDTO> select() {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<MovieselectDTO> dtoList = new ArrayList<MovieselectDTO>();
+		ArrayList<MovieDTO> dtoList = new ArrayList<MovieDTO>();
 		try {
 
 			conn = DB.conn();
@@ -75,26 +125,21 @@ public class MovieDAOimpl implements MovieDAO{
 			String sql = "SELECT * FROM movie_tb";
 			pstmt = conn.prepareStatement(sql);
 
-//			StringBuffer sql = new StringBuffer();
-//			sql.append("INSERT INTO movie_tb(m_title, m_actor, m_director,m_img)\r\n");
-			
 			rs = pstmt.executeQuery(sql);
 			while (rs.next()) {
-			System.out.println("영화번호 : " + rs.getInt("m_num"));
-			System.out.println("영화제목 : " + rs.getString("m_title"));
-			System.out.println("주연배우 : " + rs.getString("m_actor"));
-			System.out.println("감독 : " + rs.getString("m_director"));
-			System.out.println("이미지 : " + rs.getString("m_img"));
-//			System.out.println("링크 : " + rs.getString("pw")); url없음
-			
-			MovieselectDTO dto = new MovieselectDTO();
-			dto.setNum((rs.getInt("m_num")));
-			dto.setTitle((rs.getString("m_title")));
-			dto.setAt((rs.getString("m_actor")));
-			dto.setDt((rs.getString("m_director")));
-			dto.setSrc((rs.getString("m_img")));
-			dtoList.add(dto);
-		}
+				MovieDTO dto = new MovieDTO();
+				System.out.println("영화번호 : " + rs.getInt("m_num"));
+				System.out.println("영화제목 : " + rs.getString("m_title"));
+				System.out.println("주연배우 : " + rs.getString("m_actor"));
+				System.out.println("감독 : " + rs.getString("m_director"));
+				
+				dto.setNum((rs.getInt("m_num")));
+				dto.setTitle((rs.getString("m_title")));
+				dto.setSrc((rs.getString("m_img")));
+				dto.setAt((rs.getString("m_actor")));
+				dto.setDt((rs.getString("m_director")));
+				dtoList.add(dto);
+			}
 
 		} catch (ClassNotFoundException e) {
 			System.out.println("드라이버 로딩 실패");
@@ -122,11 +167,11 @@ public class MovieDAOimpl implements MovieDAO{
 		return dtoList;
 	}
 	
-	public MovieselectDTO select(int num) {
+	public MovieDTO select(String num) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		MovieselectDTO dto = new MovieselectDTO();
+		MovieDTO dto = new MovieDTO();
 		try {
 			
 			conn = DB.conn();
@@ -136,16 +181,16 @@ public class MovieDAOimpl implements MovieDAO{
 			
 //			StringBuffer sql = new StringBuffer();
 //			sql.append("INSERT INTO movie_tb(m_title, m_actor, m_director,m_img)\r\n");
-			
-			pstmt.setInt(1, num);
+			int n = Integer.parseInt(num);
+			pstmt.setInt(1, n);
 			
 			rs = pstmt.executeQuery(sql);
 			while (rs.next()) {
 				System.out.println("영화번호 : " + rs.getInt("m_num"));
 				System.out.println("영화제목 : " + rs.getString("m_title"));
-				System.out.println("주연배우 : " + rs.getString("m_actor"));
-				System.out.println("감독 : " + rs.getString("m_director"));
-				System.out.println("이미지 : " + rs.getString("m_img"));
+//				System.out.println("주연배우 : " + rs.getString("m_actor"));
+//				System.out.println("감독 : " + rs.getString("m_director"));
+//				System.out.println("이미지 : " + rs.getString("m_img"));
 //			System.out.println("링크 : " + rs.getString("pw")); url없음
 				
 				dto.setNum((rs.getInt("m_num")));

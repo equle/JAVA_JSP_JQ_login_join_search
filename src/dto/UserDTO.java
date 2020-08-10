@@ -2,6 +2,15 @@ package dto;
 
 public class UserDTO {
 	private String pw, email, phone, name;
+	private int num;
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
 
 	public String getName() {
 		return name;

@@ -36,7 +36,7 @@ public class MovieServlet extends HttpServlet {
 		
 		MovieDAO dao = new MovieDAOimpl(); //DB에 저장되어있는 데이터 가져와 출력
 		
-		ArrayList<MovieselectDTO> dtoList = dao.select();
+		ArrayList<MovieDTO> dtoList = dao.select();
 		
 		Gson gson = new Gson();
 		String jsonData = gson.toJson(dtoList);

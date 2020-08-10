@@ -179,6 +179,7 @@ public class UserDAOimpl implements UserDAO {
 				dto.setPw(rs.getString("pw"));
 				dto.setName(rs.getString("name"));
 				dto.setPhone(rs.getString("phone"));
+				dto.setNum(rs.getInt("usernum"));
 			}else {
 				System.out.println("사용자가 없다.");
 				return null;
