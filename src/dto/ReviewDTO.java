@@ -1,14 +1,15 @@
 package dto;
 
-public class reviewDTO {
+public class ReviewDTO {
 
-	private int r_score, u_num,m_num;
+	private int u_num, m_num;
 	private String r_title, r_text ;
-	
-	public int getR_score() {
+	private float r_score;
+
+	public float getR_score() {
 		return r_score;
 	}
-	public void setR_score(int r_score) {
+	public void setR_score(float r_score) {
 		this.r_score = r_score;
 	}
 	public int getM_num() {

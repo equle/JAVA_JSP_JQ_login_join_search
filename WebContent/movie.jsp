@@ -4,7 +4,7 @@
 
 <%@ include file="top.jsp"%>
 
-<% if (dto == null) { %>
+<% if(dto == null) { %>
 <script>
 	alert("로그인을 해야 이용 가능한 서비스 입니다.");
 	location.href = 'login.nhn';
@@ -109,19 +109,27 @@ $(document).ready(function(){
 			r_title : r_title,
 			r_text : r_text,
 			r_score : r_score
+			
 		}, function(data, status){
-	    	console.log(data);
+			if (data.trim() == "ok") {
+				$("#myModal").modal("hide");
+        		alert("후기가 저장 되었습니다.");
+//         		location.reload();   // 페이지 새로고침
+        	} else {
+        		alert("저장에 실패 했습니다.\n관리자에게 문의");
+        	}
+	    	
 		});
 	});
  	
     $.get("movieok.nhn", 
     function(data, status){
     	var html = "";
-    	console.log(data);
+//     	console.log(data);
 //     	console.log(data.items);
     	$.each(data, function(key, field){
-    		console.log(key);	
-    		console.log(field);	
+//     		console.log(key);	
+//     		console.log(field);	
 //     		html += "<a href='" + field.url + "' target='_blank'>"
     		html += "<a href='#' target='_blank'>"
     		html += "<img src='" + field.src + "'></a><br>";

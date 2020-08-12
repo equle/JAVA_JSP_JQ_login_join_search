@@ -13,38 +13,35 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import dto.ReviewDTO;
+import dto.ReviewViewDTO;
 import dao.ReviewDAO;
 import dao.ReviewDAOimpl;
 
-@WebServlet("/ReviewServlet")
-public class ReviewServlet extends HttpServlet {
+@WebServlet("/ReviewDetailServlet")
+public class ReviewDetailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ReviewServlet() {
+    public ReviewDetailServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		request.setCharacterEncoding("utf-8");
+		PrintWriter out = response.getWriter();
 		
-		int m_num = Integer.parseInt(request.getParameter("m_num"));
-		int u_num = Integer.parseInt(request.getParameter("u_num"));
-		float r_score = Float.parseFloat(request.getParameter("r_score"));
-		String r_title = request.getParameter("r_title");
-		String r_text = request.getParameter("r_text");
+		int r_num = Integer.parseInt(request.getParameter("r_num"));
 		
-		ReviewDTO dto = new ReviewDTO();
-		dto.setM_num(m_num);
-		dto.setU_num(u_num);
-		dto.setR_title(r_title);
-		dto.setR_score(r_score);
-		dto.setR_text(r_text);
+		System.out.println(r_num);
 		
 		ReviewDAO dao = new ReviewDAOimpl();
-		dao.insert(dto);
+		ReviewViewDTO dto = dao.selectDetail(r_num);
 		
-		response.getWriter().append("ok");			
+		Gson gson = new Gson();
+		String jsonData = gson.toJson(dto);
+		System.out.println(jsonData);
+		response.setContentType("application/json; charset=UTF-8");
+		out.println(jsonData);
 		
 	}
 
